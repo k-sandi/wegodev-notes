@@ -29,10 +29,10 @@
 			},
 			propRemoveNote : {
 				type: Function
-			},
-			propDataForm : {
-				type: Object
 			}
+			// propDataForm : {
+			// 	type: Object
+			// }
 		},
 		data: function() {
 			return {
@@ -62,12 +62,19 @@
 				this.description = '';
 			}
 		},
-		watch: { //akan selalu memantau setiap kali ada perubahan berdasar data atau methods yang kita buat
-			propDataForm: function(note) {
-				this.id = note.id;
-				this.title = note.title;
-				this.description = note.description;
-			}
+		// watch: { //akan selalu memantau setiap kali ada perubahan berdasar data atau methods yang kita buat
+		// 	propDataForm: function(note) {
+		// 		this.id = note.id;
+		// 		this.title = note.title;
+		// 		this.description = note.description;
+		// 	}
+		// },
+		mounted(){  //mounted sangat cocok ketika kita mendeklarasikan hal2 yang harus dijalankan pertama kali dari sebuah komponen.
+			this.$root.$on('emitForm', data => { //"$on" akan menjadi penerima dari emit yang ada dalam listNotes
+				this.id = data.id;
+				this.title = data.title;
+				this.description = data.description;data
+			})  
 		}
 	}
 

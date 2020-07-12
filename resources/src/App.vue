@@ -11,13 +11,14 @@
         <button @click="newNote" class="bg-success btn btn-new-note">
           + Note Baru
         </button>
-        <ListNotes :propNotes="notes" :propEditNote="editNote" />
+        <ListNotes :propEditNote="editNote" />
       </div>
       <!--List-->
     </div>
     <div class="kanan">
       <!--Form-->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote" :propDataForm="dataForm" />
+      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote"  />
+      <!-- :propDataForm="dataForm" -->
     </div>
   </div>
 </template>
@@ -30,8 +31,8 @@ export default {
   name: 'app',
   data: function() {
     return {
-      dataForm: {},
-      notes: [{ id:1, title: 'Wegodev',description: 'Ini isi wegodev' },{ id:2, title: 'Super Userz',description: 'Ini isi super user cuy' }]
+      // dataForm: {},
+      
       // notes: [{ id:1, title: 'Wegodev',description: 'Ini isi wegodev' },{ id:2, title: 'Super Userz',description: 'Ini isi super user cuy' }]
     }
   },
@@ -42,11 +43,6 @@ export default {
   methods: {
     newNote() {
       this.dataForm = {id:0, title: '', description: ''}
-    },
-    editNote(id){
-      // console.log('App vue :' + id);
-      this.dataForm = this.notes.find(note => note.id === id);
-      // console.log(this.dataForm);
     },
     saveNote(title, description) {
       
