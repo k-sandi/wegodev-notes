@@ -41,11 +41,12 @@ export default {
   },
   methods: {
     newNote() {
-      this.dataForm = {id:0, title: '', description: ''}
+      this.dataForm = {id:0, title: '', description: '', mode: 'save'}
     },
     editNote(id){
       // console.log('App vue :' + id);
       this.dataForm = this.notes.find(note => note.id === id);
+      this.dataForm.mode = 'update';
       // console.log(this.dataForm);
     },
     saveNote(title, description) {
