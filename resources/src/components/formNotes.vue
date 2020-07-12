@@ -27,9 +27,9 @@
 			propUpdateNote : {
 				type: Function
 			},
-			propRemoveNote : {
-				type: Function
-			}
+			// propRemoveNote : {
+			// 	type: Function
+			// }
 			// propDataForm : {
 			// 	type: Object
 			// }
@@ -53,7 +53,9 @@
 				
 			},
 			submitRemove() {
-				this.propRemoveNote(this.id);
+				// this.propRemoveNote(this.id);
+				let data = {id: this.id}
+				this.$root.$emit('emitRemoveNote', data)
 				this.resetInput();
 			},
 			resetInput() {

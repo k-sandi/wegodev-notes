@@ -32,7 +32,13 @@
 				// console.log(this.dataForm);
 				this.$root.$emit('emitForm', dataForm); //berkomunikasi antara listNote dan formNote. Jadi, dengan ini dapat mengirimkan sebuah event yang dapat ditangkap di dalam app.vue, formNote atau komponen lainnya.
 			}
-		} 
+		},
+		mounted() {
+			this.$root.$on('emitRemoveNote', data => {
+				let noteIndex = this.notes.findIndex(note => note.id === data.id);
+				this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
+			})
+		}
 	}
 
 </script>

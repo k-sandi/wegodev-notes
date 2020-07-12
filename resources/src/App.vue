@@ -17,8 +17,8 @@
     </div>
     <div class="kanan">
       <!--Form-->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote"  />
-      <!-- :propDataForm="dataForm" -->
+      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote"   />
+      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" -->
     </div>
   </div>
 </template>
@@ -69,11 +69,11 @@ export default {
       
       /* SIMPULAN */
       /* Untuk mengubah nilai notes yang sudah ada kita memerlukan index arraynya agar kita bisa mengakses objek yang ada di dalam index tersebut. Ketika sudah dapat index array-nya, maka tinggal akses objeknya kemudian ganti dengan nilai yang baru. */
-    },
-    removeNote(id) {
-      let noteIndex = this.notes.findIndex(note => note.id === id);
-      this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
     }
+    // removeNote(id) {
+    //   let noteIndex = this.notes.findIndex(note => note.id === id);
+    //   this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
+    // }
   }
 }
 </script>
