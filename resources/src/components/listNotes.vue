@@ -37,7 +37,12 @@
 			this.$root.$on('emitRemoveNote', data => {
 				let noteIndex = this.notes.findIndex(note => note.id === data.id);
 				this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
-			})
+			});
+			this.$root.$on('emitUpdateNote', data => {
+				let noteIndex = this.notes.findIndex(note => note.id === data.id);    
+				this.notes[noteIndex].title = data.title;
+				this.notes[noteIndex].description = data.description;
+			});
 		}
 	}
 

@@ -11,14 +11,15 @@
         <button @click="newNote" class="bg-success btn btn-new-note">
           + Note Baru
         </button>
-        <ListNotes :propEditNote="editNote" />
+        <ListNotes />
+        <!-- <ListNotes :propEditNote="editNote" /> -->
       </div>
       <!--List-->
     </div>
     <div class="kanan">
       <!--Form-->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote"   />
-      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" -->
+      <FormNotes :propSaveNote="saveNote" />
+      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" :propUpdateNote="updateNote" -->
     </div>
   </div>
 </template>
@@ -60,16 +61,16 @@ export default {
       }
       this.notes.push(newNote);
       this.editNote(newID);
-    },
-    updateNote(id, title, description) {
-      let noteIndex = this.notes.findIndex(note => note.id === id);
-      
-      this.notes[noteIndex].title = title;
-      this.notes[noteIndex].description = description;
-      
-      /* SIMPULAN */
-      /* Untuk mengubah nilai notes yang sudah ada kita memerlukan index arraynya agar kita bisa mengakses objek yang ada di dalam index tersebut. Ketika sudah dapat index array-nya, maka tinggal akses objeknya kemudian ganti dengan nilai yang baru. */
     }
+    // updateNote(id, title, description) {
+    //   let noteIndex = this.notes.findIndex(note => note.id === id);
+      
+    //   this.notes[noteIndex].title = title;
+    //   this.notes[noteIndex].description = description;
+      
+    //   /* SIMPULAN */
+    //    Untuk mengubah nilai notes yang sudah ada kita memerlukan index arraynya agar kita bisa mengakses objek yang ada di dalam index tersebut. Ketika sudah dapat index array-nya, maka tinggal akses objeknya kemudian ganti dengan nilai yang baru. 
+    // }
     // removeNote(id) {
     //   let noteIndex = this.notes.findIndex(note => note.id === id);
     //   this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").

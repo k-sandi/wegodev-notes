@@ -23,10 +23,10 @@
 		props: {
 			propSaveNote : {
 				type: Function
-			},
-			propUpdateNote : {
-				type: Function
-			},
+			}
+			// propUpdateNote : {
+			// 	type: Function
+			// },
 			// propRemoveNote : {
 			// 	type: Function
 			// }
@@ -44,18 +44,23 @@
 		methods: {
 			submitNote(e) {
 				e.preventDefault();
-
+				let data = {
+					title: this.title,
+					description: this.description
+				}
 				if (this.id === 0) {
 					this.propSaveNote(this.title, this.description);
 				} else {
-					this.propUpdateNote(this.id, this.title, this.description);
+					data.id = this.id;
+					this.$root.$emit('emitUpdateNote', data);
+					// this.propUpdateNote(this.id, this.title, this.description);
 				}
 				
 			},
 			submitRemove() {
 				// this.propRemoveNote(this.id);
 				let data = {id: this.id}
-				this.$root.$emit('emitRemoveNote', data)
+				this.$root.$emit('emitRemoveNote', data);
 				this.resetInput();
 			},
 			resetInput() {
