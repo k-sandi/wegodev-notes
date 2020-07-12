@@ -18,8 +18,8 @@
     </div>
     <div class="kanan">
       <!--Form-->
-      <FormNotes :propSaveNote="saveNote" />
-      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" :propUpdateNote="updateNote" -->
+      <FormNotes />
+      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" :propUpdateNote="updateNote" :propSaveNote="saveNote" -->
     </div>
   </div>
 </template>
@@ -43,25 +43,26 @@ export default {
   },
   methods: {
     newNote() {
-      this.dataForm = {id:0, title: '', description: ''}
-    },
-    saveNote(title, description) {
-      
-      let newID = 0;
-      if (this.notes.length === 0) {
-        newID = 1;
-      } else {
-        newID = this.notes[this.notes.length - 1].id + 1;
-      }
-
-      let newNote = {
-        id: newID,
-        'title': title, 
-        'description': description 
-      }
-      this.notes.push(newNote);
-      this.editNote(newID);
+      let dataForm = {id:0, title: '', description: ''}
+      this.$root.$emit('emitForm', dataForm);
     }
+    // saveNote(title, description) {
+      
+      // let newID = 0;
+      // if (this.notes.length === 0) {
+      //   newID = 1;
+      // } else {
+      //   newID = this.notes[this.notes.length - 1].id + 1;
+      // }
+
+      // let newNote = {
+      //   id: newID,
+      //   'title': title, 
+      //   'description': description 
+      // }
+      // this.notes.push(newNote);
+      // this.editNote(newID);
+    // }
     // updateNote(id, title, description) {
     //   let noteIndex = this.notes.findIndex(note => note.id === id);
       

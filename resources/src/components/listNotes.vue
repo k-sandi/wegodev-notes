@@ -31,6 +31,17 @@
 				let dataForm = this.notes.find(note => note.id === id);
 				// console.log(this.dataForm);
 				this.$root.$emit('emitForm', dataForm); //berkomunikasi antara listNote dan formNote. Jadi, dengan ini dapat mengirimkan sebuah event yang dapat ditangkap di dalam app.vue, formNote atau komponen lainnya.
+			},
+			createNewID(){
+				let newID = 0;
+
+				if (this.notes.length === 0) {
+					newID = 1;
+				} else {
+					newID = this.notes[this.notes.length - 1].id + 1;
+				}
+
+				return newID;
 			}
 		},
 		mounted() {
@@ -42,6 +53,18 @@
 				let noteIndex = this.notes.findIndex(note => note.id === data.id);    
 				this.notes[noteIndex].title = data.title;
 				this.notes[noteIndex].description = data.description;
+			});
+
+			this.$root.$on('emitSaveNote', data => {
+				let newID = this.createNewID();
+				let newNote = {
+					id: newID,
+					'title': data.title, 
+					'description': data.description 
+				}
+				
+				this.notes.push(newNote);
+				this.editNote(newID);
 			});
 		}
 	}
