@@ -21,11 +21,6 @@
 				notes: []
 			}
 		},
-		props: {
-			propEditNote: {
-				type: Function
-			}
-		},
 		methods: {
 			editNote(id){
 				// console.log('App vue :' + id);
@@ -34,20 +29,8 @@
 				dataForm.mode = 'update';
 				this.$root.$emit('emitForm', dataForm); //berkomunikasi antara listNote dan formNote. Jadi, dengan ini dapat mengirimkan sebuah event yang dapat ditangkap di dalam app.vue, formNote atau komponen lainnya.
 			},
-			createNewID(){
-				let newID = 0;
-
-				if (this.notes.length === 0) {
-					newID = 1;
-				} else {
-					newID = this.notes[this.notes.length - 1].id + 1;
-				}
-
-				return newID;
-			},
 			getData() {
 				axios.get('http://localhost/wegodev-notes/note').then(response =>{
-					console.log(response);
 					this.notes = response.data;
 				});
 			}
@@ -66,15 +49,16 @@
 			});
 
 			this.$root.$on('emitSaveNote', data => {
-				let newID = this.createNewID();
+				// let newID = this.createNewID();
 				let newNote = {
-					id: newID,
+					id: data.id,
 					'title': data.title, 
 					'description': data.description 
 				}
 				
-				this.notes.push(newNote);
-				this.editNote(newID);
+				// this.notes.push(newNote);
+				this.notes.unshift(newNote); //jika ada data baru maka akan diletakkan dibagian pertama
+				this.editNote(data.id);
 			});
 		}
 	}
