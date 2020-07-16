@@ -30,6 +30,7 @@
 				// console.log('App vue :' + id);
 				let dataForm = this.notes.find(note => note.id === id);
 				// console.log(this.dataForm);
+				dataForm.mode = 'update';
 				this.$root.$emit('emitForm', dataForm); //berkomunikasi antara listNote dan formNote. Jadi, dengan ini dapat mengirimkan sebuah event yang dapat ditangkap di dalam app.vue, formNote atau komponen lainnya.
 			},
 			createNewID(){
