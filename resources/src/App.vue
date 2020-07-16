@@ -11,13 +11,15 @@
         <button @click="newNote" class="bg-success btn btn-new-note">
           + Note Baru
         </button>
-        <ListNotes :propNotes="notes" :propEditNote="editNote" />
+        <ListNotes />
+        <!-- <ListNotes :propEditNote="editNote" /> -->
       </div>
       <!--List-->
     </div>
     <div class="kanan">
       <!--Form-->
-      <FormNotes :propSaveNote="saveNote" :propUpdateNote="updateNote" :propRemoveNote="removeNote" :propDataForm="dataForm" />
+      <FormNotes />
+      <!-- :propRemoveNote="removeNote" :propDataForm="dataForm" :propUpdateNote="updateNote" :propSaveNote="saveNote" -->
     </div>
   </div>
 </template>
@@ -30,8 +32,8 @@ export default {
   name: 'app',
   data: function() {
     return {
-      dataForm: {},
-      notes: [{ id:1, title: 'Wegodev',description: 'Ini isi wegodev' },{ id:2, title: 'Super Userz',description: 'Ini isi super user cuy' }]
+      // dataForm: {},
+      
       // notes: [{ id:1, title: 'Wegodev',description: 'Ini isi wegodev' },{ id:2, title: 'Super Userz',description: 'Ini isi super user cuy' }]
     }
   },
@@ -41,44 +43,39 @@ export default {
   },
   methods: {
     newNote() {
-      this.dataForm = {id:0, title: '', description: '', mode: 'save'}
-    },
-    editNote(id){
-      // console.log('App vue :' + id);
-      this.dataForm = this.notes.find(note => note.id === id);
-      this.dataForm.mode = 'update';
-      // console.log(this.dataForm);
-    },
-    saveNote(title, description) {
-      
-      let newID = 0;
-      if (this.notes.length === 0) {
-        newID = 1;
-      } else {
-        newID = this.notes[this.notes.length - 1].id + 1;
-      }
-
-      let newNote = {
-        id: newID,
-        'title': title, 
-        'description': description 
-      }
-      this.notes.push(newNote);
-      this.editNote(newID);
-    },
-    updateNote(id, title, description) {
-      let noteIndex = this.notes.findIndex(note => note.id === id);
-      
-      this.notes[noteIndex].title = title;
-      this.notes[noteIndex].description = description;
-      
-      /* SIMPULAN */
-      /* Untuk mengubah nilai notes yang sudah ada kita memerlukan index arraynya agar kita bisa mengakses objek yang ada di dalam index tersebut. Ketika sudah dapat index array-nya, maka tinggal akses objeknya kemudian ganti dengan nilai yang baru. */
-    },
-    removeNote(id) {
-      let noteIndex = this.notes.findIndex(note => note.id === id);
-      this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
+      let dataForm = {id:0, title: '', description: '', mode: 'save'}
+      this.$root.$emit('emitForm', dataForm);
     }
+    // saveNote(title, description) {
+      
+      // let newID = 0;
+      // if (this.notes.length === 0) {
+      //   newID = 1;
+      // } else {
+      //   newID = this.notes[this.notes.length - 1].id + 1;
+      // }
+
+      // let newNote = {
+      //   id: newID,
+      //   'title': title, 
+      //   'description': description 
+      // }
+      // this.notes.push(newNote);
+      // this.editNote(newID);
+    // }
+    // updateNote(id, title, description) {
+    //   let noteIndex = this.notes.findIndex(note => note.id === id);
+      
+    //   this.notes[noteIndex].title = title;
+    //   this.notes[noteIndex].description = description;
+      
+    //   /* SIMPULAN */
+    //    Untuk mengubah nilai notes yang sudah ada kita memerlukan index arraynya agar kita bisa mengakses objek yang ada di dalam index tersebut. Ketika sudah dapat index array-nya, maka tinggal akses objeknya kemudian ganti dengan nilai yang baru. 
+    // }
+    // removeNote(id) {
+    //   let noteIndex = this.notes.findIndex(note => note.id === id);
+    //   this.notes.splice(noteIndex, 1); // splice digunakan untuk membuang sebuah array berdasarkan nilai indexnya (yang dipilih user/ "1").
+    // }
   }
 }
 </script>

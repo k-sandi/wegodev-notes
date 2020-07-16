@@ -21,20 +21,20 @@
 	
 	export default {
 		name: 'formNotes',
-		props: {
-			propSaveNote : {
-				type: Function
-			},
-			propUpdateNote : {
-				type: Function
-			},
-			propRemoveNote : {
-				type: Function
-			},
-			propDataForm : {
-				type: Object
-			}
-		},
+		// props: {
+		// 	propSaveNote : {
+		// 		type: Function
+		// 	}
+		// 	// propUpdateNote : {
+		// 	// 	type: Function
+		// 	// },
+		// 	// propRemoveNote : {
+		// 	// 	type: Function
+		// 	// }
+		// 	// propDataForm : {
+		// 	// 	type: Object
+		// 	// }
+		// },
 		data: function() {
 			return {
 				id: 0,
@@ -45,16 +45,26 @@
 		},
 		methods: {
 			submitSave() {
-				this.propSaveNote(this.title, this.description)
-				
+				let data = {
+					title: this.title,
+					description: this.description
+				}
+				this.$root.$emit('emitSaveNote', data);
 			},
 
 			submitUpdate() {
-				this.propUpdateNote(this.id, this.title, this.description);
+				let data = {
+					id: this.id,
+					title: this.title,
+					description: this.description
+				}
+				this.$root.$emit('emitUpdateNote', data);
 			},
 
 			submitRemove() {
-				this.propRemoveNote(this.id);
+				// this.propRemoveNote(this.id);
+				let data = {id: this.id}
+				this.$root.$emit('emitRemoveNote', data);
 				this.resetInput();
 			},
 			resetInput() {
@@ -63,13 +73,13 @@
 				this.description = '';
 			}
 		},
-		watch: { //akan selalu memantau setiap kali ada perubahan berdasar data atau methods yang kita buat
-			propDataForm: function(note) {
-				this.id = note.id;
-				this.title = note.title;
-				this.description = note.description;
-				this.mode = note.mode;
-			}
+		mounted(){  //mounted sangat cocok ketika kita mendeklarasikan hal2 yang harus dijalankan pertama kali dari sebuah komponen.
+			this.$root.$on('emitForm', data => { //"$on" akan menjadi penerima dari emit yang ada dalam listNotes
+				this.id = data.id;
+				this.title = data.title;
+				this.description = data.description;
+				this.mode = data.mode;
+			})  
 		}
 	}
 
