@@ -20,7 +20,6 @@
 <script type="text/javascript">
 	import axios from 'axios';
 
-
 	export default {
 		name: 'formNotes',
 		// props: {
@@ -52,7 +51,7 @@
 				params.append('title', this.title);
 				params.append('description', this.description);
 
-				axios.post(process.env.VUE_APP_BASE_URL + '/api/notes', params).then(response =>{
+				axios.post('/api/notes', params).then(response =>{
 					let data = {
 						id: response.data.id,
 						title: this.title,
@@ -70,7 +69,7 @@
 				params.append('title', this.title);
 				params.append('description', this.description);
 
-				axios.put(process.env.VUE_APP_BASE_URL + '/api/notes/'+this.id, params).then(response =>{
+				axios.put('/api/notes/'+this.id, params).then(response =>{
 					let data = {
 						id: response.data.id,
 						title: this.title,
@@ -84,7 +83,7 @@
 				let params = new URLSearchParams();
 				params.append('id', this.id);
 
-				axios.delete(process.env.VUE_APP_BASE_URL + '/api/notes/'+this.id, params).then(response =>{
+				axios.delete('/api/notes/'+this.id, params).then(response =>{
 					let data = {
 						id: response.data.id
 					}
