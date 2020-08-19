@@ -30,7 +30,7 @@
 				this.$root.$emit('emitForm', dataForm); //berkomunikasi antara listNote dan formNote. Jadi, dengan ini dapat mengirimkan sebuah event yang dapat ditangkap di dalam app.vue, formNote atau komponen lainnya.
 			},
 			getData() {
-				axios.get('http://localhost/wegodev-notes/note').then(response =>{
+				axios.get(process.env.VUE_APP_BASE_URL + '/api/notes').then(response =>{
 					this.notes = response.data;
 				});
 			}
